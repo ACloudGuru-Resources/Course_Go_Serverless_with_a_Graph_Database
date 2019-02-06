@@ -1,0 +1,39 @@
+service: neptune-lambda
+
+plugins:
+  - serverless-pseudo-parameters
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  vpc:
+    securityGroupIds:
+      - ${cf:${self:custom.neptuneStackName}.SecurityGroup}
+    subnetIds:
+      - ${cf:${self:custom.neptuneStackName}.Subnet1}
+      - ${cf:${self:custom.neptuneStackName}.Subnet2}
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - neptune-db:*
+      Resource:
+        - "arn:aws:neptune-db:${self:provider.region}:#{AWS::AccountId}:${cf:${self:custom.neptuneStackName}.DBClusterResourceId}/*"
+
+custom:
+  webpackIncludeModules:
+    forceInclude:
+      - gremlin
+  neptuneStackName: neptune-serverless-dev
+
+functions:
+  query:
+    handler: handler.query
+    timeout: 20
+    environment: 
+      CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
+    events:
+      - http:
+          path: query
+          method: get
