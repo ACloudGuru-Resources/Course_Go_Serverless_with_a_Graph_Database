@@ -1,4 +1,4 @@
-# Neptune Stack
+# Neptune Lambda Stack - Chapter 3
 
 This stack adds a Lambda to the VPC created by the Neptune stack. The Lambda queries the Netune database.
 

@@ -1,7 +1,9 @@
 service: neptune-lambda
 
 plugins:
+  - serverless-webpack
   - serverless-pseudo-parameters
+  - serverless-plugin-vpc-eni-cleanup
 
 provider:
   name: aws
@@ -20,7 +22,13 @@ provider:
         - neptune-db:*
       Resource:
         - "arn:aws:neptune-db:${self:provider.region}:#{AWS::AccountId}:${cf:${self:custom.neptuneStackName}.DBClusterResourceId}/*"
-
+    - Effect: Allow # for serverless-plugin-vpc-eni-cleanup to prevent long stack removal time
+      Action:
+        - ec2:DeleteNetworkInterface
+        - ec2:DetachNetworkInterface
+        - ec2:DescribeNetworkInterfaces
+      Resource:
+        - "*"
 custom:
   webpackIncludeModules:
     forceInclude:

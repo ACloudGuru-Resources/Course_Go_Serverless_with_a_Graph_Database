@@ -1,0 +1,18 @@
+{
+  "name": "neptune-serverless",
+  "version": "1.0.0",
+  "description": "query neptune in vpc",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "gremlin": "^3.4.0"
+  },
+  "devDependencies": {
+    "serverless-pseudo-parameters": "^2.4.0",
+    "serverless-webpack": "^5.2.0"
+  }
+}

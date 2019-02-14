@@ -1,0 +1,84 @@
+service: rekognition-neptune-data
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-webpack
+  - serverless-s3-remover
+
+custom:
+  webpack:
+    includeModules:
+      forceExclude:
+        - aws-sdk
+
+  remover:
+     buckets:
+       - ${self:provider.environment.S3_BUCKET}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+  environment:
+    S3_BUCKET: mbudmrekphotos
+    REKOGNITION_COLLECTION: neptune-photos
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - lambda:InvokeAsync
+      Resource:
+        - "*"
+        - "arn:aws:lambda:*:*:*"
+    - Effect: "Allow"
+      Action:
+        - "s3:GetObject"
+        - "s3:PutObject"
+        - "s3:DeleteObject"
+        - "s3:ListBucket"
+      Resource:
+        - "arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*"
+    - Effect: "Allow"
+      Action:
+        - "rekognition:IndexFaces"
+        - "rekognition:CreateCollection"
+        - "rekognition:DeleteCollection"
+        - "rekognition:SearchFaces"
+      Resource: "*"
+
+functions:
+  create:
+    handler: collection.createCollection
+    events:
+      - http:
+          path: create
+          method: post
+          cors: true
+
+  delete:
+    handler: collection.deleteCollection
+    events:
+      - http:
+          path: delete
+          method: post
+          cors: true
+
+  index:
+    handler: index.indexFaces
+    events:
+      - s3:
+          bucket: ${self:provider.environment.S3_BUCKET}
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .jpg
+resources:
+  Outputs:
+    S3Bucket:
+      Description: S3 bucket for neptune to load from
+      Value: ${self:provider.environment.S3_BUCKET}
+
+package:
+  exclude:
+    - node_modules/**
+    - '!node_modules/json-2-csv/**'

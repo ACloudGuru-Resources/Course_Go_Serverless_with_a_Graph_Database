@@ -1,0 +1,23 @@
+{
+  "name": "rekognition-app",
+  "version": "1.0.0",
+  "description": "use rekognition to analyse photos for faces and convert data to graph database CSV format",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape './**/*.test.js' | tap-spec"
+  },
+  "author": "Steve Roberts",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.401.0",
+    "json-2-csv": "^3.3.0"
+  },
+  "devDependencies": {
+    "serverless-s3-remover": "^0.6.0",
+    "serverless-s3-sync": "^1.7.2",
+    "serverless-webpack": "^5.2.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.0",
+    "webpack": "^4.29.3"
+  }
+}
