@@ -1,0 +1,59 @@
+service: neptune-lambda
+
+plugins:
+  - serverless-webpack
+  - serverless-pseudo-parameters
+  - serverless-plugin-vpc-eni-cleanup
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  vpc:
+    securityGroupIds:
+      - ${cf:${self:custom.neptuneStackName}.SecurityGroup}
+    subnetIds:
+      - ${cf:${self:custom.neptuneStackName}.Subnet1}
+      - ${cf:${self:custom.neptuneStackName}.Subnet2}
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - neptune-db:*
+      Resource:
+        - "arn:aws:neptune-db:${self:provider.region}:#{AWS::AccountId}:${cf:${self:custom.neptuneStackName}.DBClusterResourceId}/*"
+    - Effect: Allow # for serverless-plugin-vpc-eni-cleanup to prevent long stack removal time
+      Action:
+        - ec2:DeleteNetworkInterface
+        - ec2:DetachNetworkInterface
+        - ec2:DescribeNetworkInterfaces
+      Resource:
+        - "*"
+custom:
+  webpackIncludeModules:
+    forceInclude:
+      - gremlin
+  neptuneStackName: neptune-serverless-dev
+  rekognitionStackName: rekognition-neptune-data
+
+functions:
+  query:
+    handler: handler.query
+    timeout: 20
+    environment: 
+      CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
+    events:
+      - http:
+          path: query
+          method: get
+
+  loader:
+    handler: neptune.loader
+    timeout: 20
+    environment: 
+      ROLE_ARN: ${cf:${self:custom.neptuneStackName}.NeptuneLoadFromS3RoleArn}
+      LOADER_S3_BUCKET: ${cf:${self:custom.rekognitionStackName}.S3Bucket}
+    events:
+      - http:
+          path: loader
+          method: post
