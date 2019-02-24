@@ -9,10 +9,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "gremlin": "^3.4.0"
+    "gremlin": "^3.4.0",
+    "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
+    "serverless-plugin-vpc-eni-cleanup": "^1.0.0",
     "serverless-pseudo-parameters": "^2.4.0",
-    "serverless-webpack": "^5.2.0"
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.29.5"
   }
 }

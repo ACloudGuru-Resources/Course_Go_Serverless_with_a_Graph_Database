@@ -15,6 +15,31 @@ This stack has dependencies so you'll need to run:
 npm install
 ``` 
 
+## loading
+
+
+
+curl -X POST \
+    -H 'Content-Type: application/json' \
+    http://neptunedbinstance-kltodbfmklwo.cgmqlv83pmli.us-east-1.neptune.amazonaws.com:8182/loader -d '
+    {
+      "source" : "s3://mbudmrekphotos/data",
+      "format" : "csv",
+      "iamRoleArn" : "arn:aws:iam::366399188066:role/neptune-serverless-dev-NeptuneLoadFromS3Role-164DZOATUI4F2",
+      "region" : "us-east-1",
+      "failOnError" : "FALSE"
+    }'
+
+curl -X POST \
+    -H 'Content-Type: application/json' \
+    http://neptunedbinstance-kltodbfmklwo.cgmqlv83pmli.us-east-1.neptune.amazonaws.com:8182/loader -d '{ 
+        "source": "s3://mbudmrekphotos/data",
+        "format: 'csv',
+        "iamRoleArn: 'arn:aws:iam::366399188066:role/neptune-serverless-dev-NeptuneLoadFromS3Role-164DZOATUI4F2",
+        "region: "us-east-1",
+        "failOnError: "FALSE"
+    }
+
 Deploy (after the neptune stack has completed deployment):
 ```sh
 sls deploy

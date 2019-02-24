@@ -169,7 +169,7 @@ resources:
       Type: 'AWS::IAM::Role'
       Properties:
         AssumeRolePolicyDocument:
-          Version: 2012-10-17
+          Version: '2012-10-17'
           Statement:
             - Effect: Allow
               Principal:
@@ -194,7 +194,7 @@ resources:
     VPCS3Endpoint:
       Type: 'AWS::EC2::VPCEndpoint'
       DependsOn:
-        - VPC
+        - NeptuneVPC
       Properties:
         RouteTableIds:
           - !Ref SubnetRouteTable
@@ -203,9 +203,9 @@ resources:
           - - com.amazonaws.
             - !Ref 'AWS::Region'
             - .s3
-        VpcId: !Ref VPC
+        VpcId: !Ref NeptuneVPC
         PolicyDocument:
-          Version: 2012-10-17
+          Version: '2012-10-17'
           Statement:
             - Effect: Allow
               Principal: '*'
