@@ -5,7 +5,7 @@ const loaderS3Bucket = process.env.LOADER_S3_BUCKET;
 const roleArn = process.env.ROLE_ARN;
 const awsRegion = process.env.AWS_REGION
 
-exports.loader = (event, context, callback) => {
+exports.load = (event, context, callback) => {
     const body = {
         source : `s3://${loaderS3Bucket}/data/`, 
         format : "csv",
