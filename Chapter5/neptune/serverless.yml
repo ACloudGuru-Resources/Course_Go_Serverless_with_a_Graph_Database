@@ -23,7 +23,7 @@ resources:
             - "NeptuneServiceSecurityGroup"
             - "GroupId"
         Port: 8182
-        IamAuthEnabled: false # make this true if using this for anything real, you will then need to sign
+        IamAuthEnabled: false # make this true if using this for anything real, you will then need to sign requests
       DependsOn:
         - NeptuneDBSubnetGroup
 
@@ -37,7 +37,7 @@ resources:
         - "NeptuneDBCluster"
 
     # VPC network
-    # VPC containing 2 subnets, these both connect to the IGW which provides public access, 
+    # VPC containing 2 subnets, these both connect to the internet gateway which provides public access, 
     # and are in different availability zones to support the neptune db cluster
     NeptuneVPC:
       Type: AWS::EC2::VPC
@@ -88,7 +88,7 @@ resources:
           - 
             Ref: Subnet2
       
-    # Setup connectivity by creating an internet GW
+    # Setup connectivity by creating an internet gateway
     InternetGateway:
       Type: AWS::EC2::InternetGateway
       Properties:

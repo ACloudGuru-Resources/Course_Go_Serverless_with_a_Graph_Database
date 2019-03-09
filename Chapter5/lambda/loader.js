@@ -1,6 +1,7 @@
 const fetch = require ('isomorphic-fetch');
 
 const instanceEndpoint = process.env.INSTANCE_ENDPOINT;
+const clusterEndpoint = process.env.CLUSTER_ENDPOINT;
 const loaderS3Bucket = process.env.LOADER_S3_BUCKET;
 const roleArn = process.env.ROLE_ARN;
 const awsRegion = process.env.AWS_REGION
@@ -13,7 +14,7 @@ exports.load = (event, context, callback) => {
         region : awsRegion,
         failOnError : "FALSE"
     };
-    const fetchUrl = `http://${instanceEndpoint}:8182/loader`;
+    const fetchUrl = `http://${clusterEndpoint}:8182/loader`;
 
     console.log('about to fetch', fetchUrl, body)
     try {
