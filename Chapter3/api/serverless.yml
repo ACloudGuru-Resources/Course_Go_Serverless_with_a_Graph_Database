@@ -37,7 +37,7 @@ custom:
 
 functions:
   query:
-    handler: handler.query
+    handler: query.query
     timeout: 20
     environment: 
       CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
