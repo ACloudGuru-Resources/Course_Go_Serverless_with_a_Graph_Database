@@ -50,6 +50,13 @@ functions:
       - http:
           path: query
           method: get
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                imageId: true
+                threshold: true
+                hops: true
 
   loader:
     handler: loader.load

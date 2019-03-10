@@ -11,8 +11,8 @@ import {
 
 import './App.css';
 
-const rekognitionApiBaseUrl = 'https://ge3z4540ad.execute-api.us-east-1.amazonaws.com/dev/';
-const neptuneApiBaseUrl = 'https://ge3z4540ad.execute-api.us-east-1.amazonaws.com/dev/';
+const rekognitionStackBaseUrl = 'https://4ykmqkg8i3.execute-api.us-east-1.amazonaws.com/dev/';
+const apiStackBaseUrl = 'https://ypo0mghgqg.execute-api.us-east-1.amazonaws.com/dev/';
 const s3BucketUrl = 'https://s3.amazonaws.com/mbudmrekphotos/';
 
 const getImageUrl = (key) => `${s3BucketUrl}${key}`;
@@ -21,8 +21,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      threshold: 80,
-      hops: 2,
+      threshold: 0.98,
+      hops: 1,
       bucketList: [],
       similarList: [],
       sourceImage: false
@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   componentWillMount(){
-    fetch(`${rekognitionApiBaseUrl}list`)
+    fetch(`${rekognitionStackBaseUrl}list`)
       .then((response) => response.json())
       .then(photos => {
         this.setState({
@@ -55,9 +55,9 @@ class App extends Component {
                 type="number" 
                 size="xs" 
                 value={this.state.threshold} 
-                max="100" 
+                max="1" 
                 min="0" 
-                step="1" 
+                step="0.01" 
                 onChange={this.handleFieldChange}
                 id="threshold"/>
               <Form.Label className="ml-lg-4 mr-lg-2" >Hops</Form.Label>
@@ -74,7 +74,7 @@ class App extends Component {
           </Navbar.Collapse>
         </Navbar>
         <Container>
-          {this.state.sourceImage ? this.renderSourceImage() : this.renderBucketList() }
+          {this.state.sourceImage ? this.renderSourceImage() : this.renderList(this.state.bucketList) }
         </Container>
       </div>
     );
@@ -82,16 +82,19 @@ class App extends Component {
   
   renderSourceImage(){
     return (
-      <Row>
-        <Col>col 1</Col>
-      </Row>
+      <div>
+        <Row>
+          {this.renderPhoto(this.state.sourceImage)}
+        </Row>
+        {this.renderList(this.state.similarList)}
+      </div>
     );
   }
   
-  renderBucketList(){
+  renderList(list){
     return (
       <Row>
-        {Array.isArray(this.state.bucketList) && this.state.bucketList.map(key => this.renderPhoto(key))}
+        {Array.isArray(list) && list.map(key => this.renderPhoto(key))}
       </Row>
     );
   }
@@ -101,7 +104,7 @@ class App extends Component {
       <img
         src={getImageUrl(key)}
         alt=""
-        className="img-fluid"
+        className="img-fluid clickme"
         onClick={this.handlePhotoClick}
         data-key={key}
       />
@@ -124,16 +127,12 @@ class App extends Component {
     } = e.target.dataset;
     console.log('img key clicked', key);
 
-    fetch(`${neptuneApiBaseUrl}query`, {
-      method: 'POST',
-      body: {
-        
-      }
-    })
+    fetch(`${apiStackBaseUrl}query?imageId=${key}&threshold=${this.state.threshold}&hops=${this.state.hops}`)
       .then((response) => response.json())
       .then(photos => {
         this.setState({
-          bucketList: photos
+          similarList: photos,
+          sourceImage: key,
         });
       })
       .catch(console.error);
