@@ -62,3 +62,6 @@ typings/
 
 # Generated Cloudformation and Lambda Zip file
 .serverless
+
+# in case I accidentally check in a credentials.csv file
+credentials.csv

@@ -1,4 +1,4 @@
-service: neptune-lambda
+service: acg-neptune-api
 
 plugins:
   - serverless-webpack
@@ -33,7 +33,7 @@ custom:
   webpackIncludeModules:
     forceInclude:
       - gremlin
-  neptuneStackName: neptune-serverless-dev
+  neptuneStackName: acg-neptune-db-dev
 
 functions:
   query:

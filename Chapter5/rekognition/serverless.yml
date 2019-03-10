@@ -1,4 +1,4 @@
-service: rekognition-neptune-data
+service: acg-rekognition-data
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 

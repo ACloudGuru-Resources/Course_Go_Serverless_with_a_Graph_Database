@@ -1,4 +1,4 @@
-service: neptune-lambda
+service: acg-neptune-api
 
 plugins:
   - serverless-webpack
@@ -16,11 +16,6 @@ provider:
       - ${cf:${self:custom.neptuneStackName}.Subnet2}
   stage: dev
   region: us-east-1
-  environment: 
-    CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
-    ROLE_ARN: ${cf:${self:custom.neptuneStackName}.NeptuneLoadFromS3RoleArn}
-    LOADER_S3_BUCKET: ${cf:${self:custom.rekognitionStackName}.S3Bucket}
-    INSTANCE_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBInstanceEndpoint}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -38,22 +33,26 @@ custom:
   webpackIncludeModules:
     forceInclude:
       - gremlin
-      - isomorphic-fetch
-  neptuneStackName: neptune-serverless-dev
-  rekognitionStackName: rekognition-neptune-data-dev
+  neptuneStackName: acg-neptune-db-dev
+  rekognitionStackName: acg-rekognition-data-dev
 
 functions:
   query:
-    handler: query.query
+    handler: handler.query
     timeout: 20
+    environment: 
+      CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
     events:
       - http:
           path: query
           method: get
 
   loader:
-    handler: loader.load
+    handler: neptune.loader
     timeout: 20
+    environment: 
+      ROLE_ARN: ${cf:${self:custom.neptuneStackName}.NeptuneLoadFromS3RoleArn}
+      LOADER_S3_BUCKET: ${cf:${self:custom.rekognitionStackName}.S3Bucket}
     events:
       - http:
           path: loader

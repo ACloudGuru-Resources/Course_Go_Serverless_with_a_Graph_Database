@@ -12,7 +12,9 @@
     "gremlin": "^3.4.0"
   },
   "devDependencies": {
+    "serverless-plugin-vpc-eni-cleanup": "^1.0.0",
     "serverless-pseudo-parameters": "^2.4.0",
-    "serverless-webpack": "^5.2.0"
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.29.6"
   }
 }
