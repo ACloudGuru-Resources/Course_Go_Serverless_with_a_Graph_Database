@@ -40,7 +40,7 @@ custom:
       - gremlin
       - isomorphic-fetch
   neptuneStackName: acg-neptune-db-dev
-  rekognitionStackName: rekognition-neptune-data-dev
+  rekognitionStackName: acg-rekognition-data-dev
 
 functions:
   query:

@@ -12,7 +12,7 @@ exports.query = (event, context, callback) => {
     console.log('graph reader', graphReader);
     const gR = graphReader.traversal().withRemote(dcReader);
     console.log('traversal reader', gR);
-    gR.V().limit(1).count().next()
+    gR.V().limit(200).count().next()
         .then(data => {
             console.log(data);
             dcReader.close();
