@@ -43,9 +43,6 @@ resources:
       Type: AWS::EC2::VPC
       Properties:
           CidrBlock: 10.0.0.0/16
-          EnableDnsSupport: 'true'
-          EnableDnsHostnames: 'true'
-          InstanceTenancy: 'default'
           Tags:
             - Key: Name
               Value: neptune-vpc
@@ -55,7 +52,7 @@ resources:
       Properties:
         VpcId:
           Ref: NeptuneVPC
-        CidrBlock: 10.0.1.0/24 # same as public cidr 
+        CidrBlock: 10.0.1.0/24 
         AvailabilityZone:
           Fn::Select: 
             - 0
