@@ -24,13 +24,6 @@ provider:
     S3_BUCKET: mbudmrekphotos
     REKOGNITION_COLLECTION: neptune-photos
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - lambda:InvokeFunction
-        - lambda:InvokeAsync
-      Resource:
-        - "*"
-        - "arn:aws:lambda:*:*:*"
     - Effect: "Allow"
       Action:
         - "s3:GetObject"
