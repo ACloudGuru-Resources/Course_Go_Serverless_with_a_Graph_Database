@@ -23,7 +23,8 @@ resources:
             - "NeptuneServiceSecurityGroup"
             - "GroupId"
         Port: 8182
-        IamAuthEnabled: false # make this true if using this for anything real, you will then need to sign
+        IamAuthEnabled: false # make this true if using this for anything real, 
+                              # you will then need to sign requests
       DependsOn:
         - NeptuneDBSubnetGroup
 
@@ -85,7 +86,7 @@ resources:
           - 
             Ref: Subnet2
       
-    # Setup connectivity by creating an internet GW
+    # Setup connectivity by creating an internet gateway
     InternetGateway:
       Type: AWS::EC2::InternetGateway
       Properties:
