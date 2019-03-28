@@ -17,9 +17,11 @@ https://acloud.guru/learn/aws-rds
 More info on CidrBlocks and subnets:
 https://www.digitalocean.com/community/tutorials/understanding-ip-addresses-subnets-and-cidr-notation-for-networking
 
-## Lab: Spin up the API stack
 
-The ENI cleanup plugin occasionally fails - usually when I deploy and remove quickly. The error I get in my sls remove output is:
+## Lab: Remove the stacks
+
+### Known issue: ENI Clean up error
+The ENI cleanup plugin occasionally fails - this happened for me once when I deployed and removed several times in succession. The error I get in my sls remove output is:
 
 "VPC ENI Cleanup: Error: The interface attachment '...' does not exist."
 
