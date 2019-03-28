@@ -9,8 +9,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "gremlin": "^3.4.0",
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "utf-8-validate": "^5.0.2"
   },
   "devDependencies": {
     "serverless-plugin-vpc-eni-cleanup": "^1.0.0",
