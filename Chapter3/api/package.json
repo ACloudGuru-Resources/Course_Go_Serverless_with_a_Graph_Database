@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "gremlin": "^3.4.0"
+    "gremlin": "^3.4.1"
   },
   "devDependencies": {
     "serverless-plugin-vpc-eni-cleanup": "^1.0.0",
