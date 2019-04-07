@@ -4,6 +4,15 @@
 Request templates with serverless framework:
 - https://serverless.com/framework/docs/providers/aws/events/apigateway#request-templates
 
+```yml
+request:
+    parameters:
+        querystrings:
+            imageId: true
+            threshold: true
+            hops: true
+```
+
 Query code:
 ```javascript
 
