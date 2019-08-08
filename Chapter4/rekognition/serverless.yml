@@ -21,7 +21,7 @@ provider:
   runtime: nodejs8.10
   region: us-east-1
   environment:
-    S3_BUCKET: mbudmrekphotos
+    S3_BUCKET: ${file(./serverlessEnv.js):config.S3_BUCKET}
     REKOGNITION_COLLECTION: neptune-photos
   iamRoleStatements:
     - Effect: "Allow"

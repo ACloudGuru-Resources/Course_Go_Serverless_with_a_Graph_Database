@@ -30,6 +30,8 @@ https://s3.amazonaws.com/aws-neptune-customer-samples/v2/cloudformation-template
         ]]
 ```
 
-That's a snippet from the UserData config, an area for adding CLI commands to be run in an EC2 instance. Adapting the above to a Lambda that calls the AWS API for use in the stacks in this course would be the next logical step.
+That's a snippet from the UserData config, an area for adding CLI commands to be run in an EC2 instance. Adapting the above to a Lambda that calls the AWS API for use in the stacks in this course would be the next logical step. Using the neptune API:
 
-So for now I will keep this as a manual step in this course, and add this to the list of possible future enhancements!
+https://docs.aws.amazon.com/neptune/latest/apiref/API_AddRoleToDBCluster.html
+
+For now I will keep this as a manual step in this course, and add this to the list of possible future enhancements.
