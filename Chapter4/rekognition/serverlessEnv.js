@@ -16,7 +16,7 @@ const updateBucketNameInEnvFile = (bucketName) => {
 }
 
 const generateBucketName = () => {
-    const newBucketName = `acg-rekognition-photos-${translator.new()}`
+    const newBucketName = `mbudmrekphotos-${translator.new()}`
     return updateBucketNameInEnvFile(newBucketName)
         .then((newEnv) => newEnv.S3_BUCKET);
 }
