@@ -1,6 +1,5 @@
 const fetch = require ('isomorphic-fetch');
 
-const instanceEndpoint = process.env.INSTANCE_ENDPOINT;
 const clusterEndpoint = process.env.CLUSTER_ENDPOINT;
 const loaderS3Bucket = process.env.LOADER_S3_BUCKET;
 const roleArn = process.env.ROLE_ARN;

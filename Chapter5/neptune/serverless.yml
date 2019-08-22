@@ -250,10 +250,3 @@ resources:
         Fn::GetAtt:
           - "NeptuneLoadFromS3Role"
           - "Arn"
-
-    DBInstanceEndpoint:
-      Description: Endpoint for instance, needed by s3 loader
-      Value:
-        Fn::GetAtt:
-          - "NeptuneDBInstance"
-          - "Endpoint"

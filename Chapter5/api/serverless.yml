@@ -20,7 +20,6 @@ provider:
     CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
     ROLE_ARN: ${cf:${self:custom.neptuneStackName}.NeptuneLoadFromS3RoleArn}
     LOADER_S3_BUCKET: ${cf:${self:custom.rekognitionStackName}.S3Bucket}
-    INSTANCE_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBInstanceEndpoint}
   iamRoleStatements:
     - Effect: Allow
       Action:
