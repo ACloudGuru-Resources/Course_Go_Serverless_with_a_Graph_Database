@@ -42,3 +42,5 @@ I found it was easier to find the javascript equivalent by debugging the gremlin
 ## Create React App (CRA) vulnerabilities
 
 When npm installing the ui project, you may see some audit information flagging vulnerabilities. With a project of CRAs size, this is not uncommon. Anything I have seen is a problem with a deeply nested dependency and usually part of the build tools. If you are concerned about this you can `npm run eject` and remove the dependency that contains a vulnerability.
+
+I periodically run `npm audit fix` on all projects in this course.
