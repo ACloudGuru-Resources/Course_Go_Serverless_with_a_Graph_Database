@@ -7,13 +7,13 @@ const awsRegion = process.env.AWS_REGION
 
 exports.load = (event, context, callback) => {
     const body = {
-        source : `s3://${loaderS3Bucket}/data/`, 
+        source : `s3://${loaderS3Bucket}/data/`,
         format : "csv",
         iamRoleArn : roleArn,
         region : awsRegion,
         failOnError : "FALSE"
     };
-    const fetchUrl = `http://${clusterEndpoint}:8182/loader`;
+    const fetchUrl = `https://${clusterEndpoint}:8182/loader`;
 
     console.log('about to fetch', fetchUrl, body)
     try {
