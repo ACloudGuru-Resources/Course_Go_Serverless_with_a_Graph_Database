@@ -9,7 +9,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   vpc:
     securityGroupIds:
       - ${cf:${self:custom.neptuneStackName}.SecurityGroup}
@@ -41,7 +41,7 @@ functions:
   query:
     handler: query.query
     timeout: 20
-    environment: 
+    environment:
       CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
     events:
       - http:

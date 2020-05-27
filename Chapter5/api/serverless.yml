@@ -7,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   vpc:
     securityGroupIds:
       - ${cf:${self:custom.neptuneStackName}.SecurityGroup}
@@ -16,7 +16,7 @@ provider:
       - ${cf:${self:custom.neptuneStackName}.Subnet2}
   stage: dev
   region: us-east-1
-  environment: 
+  environment:
     CLUSTER_ENDPOINT: ${cf:${self:custom.neptuneStackName}.DBClusterEndpoint}
     ROLE_ARN: ${cf:${self:custom.neptuneStackName}.NeptuneLoadFromS3RoleArn}
     LOADER_S3_BUCKET: ${cf:${self:custom.rekognitionStackName}.S3Bucket}
