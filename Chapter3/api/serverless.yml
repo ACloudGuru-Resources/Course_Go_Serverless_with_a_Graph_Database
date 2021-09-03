@@ -1,7 +1,5 @@
 service: acg-neptune-api
 
-frameworkVersion: ">=1.1.0 <2.0.0"
-
 plugins:
   - serverless-webpack
   - serverless-pseudo-parameters
@@ -9,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   vpc:
     securityGroupIds:
       - ${cf:${self:custom.neptuneStackName}.SecurityGroup}

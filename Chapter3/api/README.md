@@ -24,3 +24,8 @@ Remove (remove this stack before the neptune stack):
 ```sh
 sls remove
 ```
+
+Note: if using an AWS profile, use the --aws-profile switch, e.g. 
+```
+sls deploy --aws-profile go-serverless-graphdb
+```
