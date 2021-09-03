@@ -1,6 +1,6 @@
 service: acg-neptune-db
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: ">2.0.0"
 
 provider:
   name: aws
@@ -168,6 +168,8 @@ resources:
     NeptuneLoadFromS3Role:
       Type: 'AWS::IAM::Role'
       Properties:
+        ManagedPolicyArns:
+          - "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
         AssumeRolePolicyDocument:
           Version: '2012-10-17'
           Statement:

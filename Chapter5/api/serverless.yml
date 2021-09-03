@@ -7,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   vpc:
     securityGroupIds:
       - ${cf:${self:custom.neptuneStackName}.SecurityGroup}
@@ -50,10 +50,16 @@ functions:
           path: query
           method: get
           cors: true
+          request:
+            parameters:
+              queryStrings:
+                imageId: true
+                threshold: true
+                hops: true
 
   loader:
     handler: loader.load
-    timeout: 20
+    timeout: 30
     events:
       - http:
           path: loader
