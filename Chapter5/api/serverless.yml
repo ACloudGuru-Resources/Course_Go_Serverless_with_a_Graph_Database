@@ -50,16 +50,10 @@ functions:
           path: query
           method: get
           cors: true
-          request:
-            parameters:
-              queryStrings:
-                imageId: true
-                threshold: true
-                hops: true
 
   loader:
     handler: loader.load
-    timeout: 30
+    timeout: 20
     events:
       - http:
           path: loader

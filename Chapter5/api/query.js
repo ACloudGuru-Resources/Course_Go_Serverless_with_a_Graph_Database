@@ -9,25 +9,8 @@ exports.query = (event, context, callback) => {
     const dcReader = new DriverRemoteConnection('wss://'+clusterEndpoint+':8182/gremlin', {});
     const graphReader = new Graph();
     const gR = graphReader.traversal().withRemote(dcReader);
-    const params = event.queryStringParameters;
-    const threshold = parseFloat(params.threshold);
-    const hops = parseInt(params.hops);
-    console.log('params', params);
 
-// add to top of module
-const __ = gremlin.process.statics;
-const p = gremlin.process.P;
-
-// replace query
-gR.V().has("imageId", params.imageId)
-        .emit()
-        .repeat(
-            __.outE("similarity").has("weight", p.gte(threshold)).inV()
-        )
-        .times(hops)
-        .dedup().by("imageId")
-        .values("imageId")
-        .toList()
+    gR.V().limit(200).count().next()
         .then(data => {
             console.log(data);
             dcReader.close();
