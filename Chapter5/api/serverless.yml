@@ -7,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   vpc:
     securityGroupIds:
       - ${cf:${self:custom.neptuneStackName}.SecurityGroup}

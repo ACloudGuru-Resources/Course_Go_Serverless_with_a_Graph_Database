@@ -11,9 +11,9 @@ import {
 
 import './App.css';
 
-const rekognitionStackBaseUrl = 'https://4ykmqkg8i3.execute-api.us-east-1.amazonaws.com/dev/';
-const apiStackBaseUrl = 'https://ypo0mghgqg.execute-api.us-east-1.amazonaws.com/dev/';
-const s3BucketUrl = 'https://s3.amazonaws.com/mbudmrekphotos/';
+const rekognitionStackBaseUrl = 'https://nodjt2no4g.execute-api.us-east-1.amazonaws.com/dev/';
+const apiStackBaseUrl = 'https://3ec8hcf4o5.execute-api.us-east-1.amazonaws.com/dev/query/';
+const s3BucketUrl = 'https://s3.amazonaws.com/mbudmrekphotos-e2yolnh03rf7lj5e3un4t7a03/';
 
 const getImageUrl = (key) => `${s3BucketUrl}${key}`;
 
