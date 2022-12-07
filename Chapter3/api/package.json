@@ -11,7 +11,7 @@
   "dependencies": {
     "bufferutil": "^4.0.1",
     "gremlin": "^3.4.1",
-    "serverless": "^2.54.0",
+    "serverless": "^3.25.1",
     "serverless-plugin-vpc-eni-cleanup": "^1.0.1",
     "utf-8-validate": "^5.0.2"
   },
