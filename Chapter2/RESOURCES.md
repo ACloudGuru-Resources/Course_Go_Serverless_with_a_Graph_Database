@@ -21,11 +21,11 @@ g.addV('face').property(id, '5').property('name', 'steve-partial-obscured').next
 
 ### add edges
 ```
-g.V('1').addE('similarity').to(g.V('2')).property('weight', 0.8).next()
-g.V('1').addE('similarity').to(g.V('3')).property('weight', 0.4).next()
-g.V('4').addE('similarity').to(g.V('3')).property('weight', 0.1).next()
-g.V('5').addE('similarity').to(g.V('3')).property('weight', 0.8).next()
-g.V('2').addE('similarity').to(g.V('5')).property('weight', 0.8).next()
+g.V('1').addE('similarity').to(__.V('2')).property('weight', 0.8)
+g.V('1').addE('similarity').to(__.V('3')).property('weight', 0.4)
+g.V('4').addE('similarity').to(__.V('3')).property('weight', 0.1)
+g.V('5').addE('similarity').to(__.V('3')).property('weight', 0.8)
+g.V('2').addE('similarity').to(__.V('5')).property('weight', 0.8)
 ```
 ### traversals 
 Simple traversal
